@@ -56,9 +56,20 @@ jobs:
         name: NuGet Packages
         path: artifacts/NuGet/Release
 
+  publish:
+    needs: build
+    runs-on: windows-2022
+    environment: ci-nuget-publish
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: NuGet Packages
+        path: packages
+
     - name: Push to NuGet
       run: |
-        dotnet nuget push artifacts\NuGet\Release\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push packages\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
     - name: Comment on PR
       if: github.event_name == 'pull_request'
