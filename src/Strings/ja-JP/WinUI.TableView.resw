@@ -183,7 +183,7 @@
     <comment>Excel 表記準拠</comment>
   </data>
   <data name="SearchBoxPlaceholder" xml:space="preserve">
-    <value>検索 ...</value>
+    <value>検索...</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>コピー</value>
